@@ -1,5 +1,4 @@
-name: Alert parent repository, Sputnik Automation on push
-
+name: Alert parent repository
 # Everytime whenever LABEL is set as  "test ready"  in Pull Request
 on:
   pull_request:
@@ -11,13 +10,13 @@ concurrency:
 
 jobs:
   build:
-    name: Dispatch to `Sputnik-Test-Automation`
+    name: Dispatch to `Cypress-Github-Acceptor`
     if: github.event.label.name == 'test ready'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - id: initialize_curl
-        run: ./setup/setup-dispatcher.sh
+        run: ./setup-dispatcher.sh
       - id: execute_curl
         env:
           GITHUB_TOKEN: ${{ secrets.CYPRESS_DISPATCH_GITHUB_TOKEN }}
