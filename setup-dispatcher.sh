@@ -6,4 +6,4 @@ curl -H "Accept: application/vnd.github.everest-preview+json" \
     -H "Authorization: token $GITHUB_TOKEN" \
     --request POST \
     --data '{"event_type": "Test-Dispatch", "client_payload": { "text": "A new code has been pushed into this repository"}}' \
-    https://api.github.com/repos/cloudfactory/sputnik-test-automation/dispatches
+    https://api.github.com/repos/cypress-github-acceptor/dispatches
