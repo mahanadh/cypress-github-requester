@@ -10,7 +10,7 @@ curl -H "Accept: application/vnd.github.everest-preview+json" \
     --request POST \
     --data '{"event_type": "Test-Dispatch", "client_payload": { 
         "text": "Label has been attached",
-        "repository_name": "cypress-github-requestor",
+        "repository_name": "cypress-github-requester",
         "pr_number": "'"$PR_NUMBER"'"
         }
         }' \
