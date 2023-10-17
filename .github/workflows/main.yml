@@ -18,6 +18,7 @@ jobs:
       - name: Debug
         run: |
           echo "GITHUB_EVENT_PATH=$GITHUB_EVENT_PATH"
+          echo "$GITHUB_EVENT_PATH" | jq .
           cat $GITHUB_EVENT_PATH
         shell: bash
       - name: Get PR Number
