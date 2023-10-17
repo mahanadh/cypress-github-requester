@@ -1,8 +1,8 @@
 name: Alert parent repository
-# Everytime whenever LABEL is set as  "test ready"  in Pull Request
+# Every time whenever LABEL is set as  "test ready"  in Pull Request
 on:
   pull_request:
-    types: [ labeled ]
+    types: [labeled]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -14,11 +14,15 @@ jobs:
     if: github.event.label.name == 'test ready'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
+      - name: Setup jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+        shell: bash
       - name: Debug
         run: |
           echo "GITHUB_EVENT_PATH=$GITHUB_EVENT_PATH"
-          echo "$GITHUB_EVENT_PATH" | jq .
           cat $GITHUB_EVENT_PATH
         shell: bash
       - name: Get PR Number
