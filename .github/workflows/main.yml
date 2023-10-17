@@ -18,7 +18,7 @@ jobs:
       - name: Get PR Number
         id: pr_number
         run: |
-          PR_NUMBER=$(echo "$GITHUB_EVENT_PATH" | jq -r '.number')
+          PR_NUMBER=$(echo "$GITHUB_EVENT_PATH" | jq -r 'number')
           echo "::set-output name=pr_number::$PR_NUMBER"
         shell: bash
       - name: Execute curl
