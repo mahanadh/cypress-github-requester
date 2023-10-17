@@ -15,15 +15,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      - name: Debug
+        run: |
+          echo "GITHUB_EVENT_PATH=$GITHUB_EVENT_PATH"
+          cat $GITHUB_EVENT_PATH
+        shell: bash
       - name: Get PR Number
         id: pr_number
         run: |
-          PR_NUMBER=$(echo "$GITHUB_EVENT_PATH" | jq -r 'number')
-          echo "::set-output name=pr_number::$PR_NUMBER"
+          PR_NUMBER=$(echo "$GITHUB_EVENT_PATH" | jq -r '.number')
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
         shell: bash
       - name: Execute curl
         id: execute_curl
         env:
-          PR_NUMBER: ${{ steps.pr_number.outputs.pr_number }}
+          PR_NUMBER: ${{ env.PR_NUMBER }}
           GITHUB_TOKEN: ${{ secrets.CYPRESS_DISPATCH_GITHUB_TOKEN }}
         run: ./setup-dispatcher.sh
